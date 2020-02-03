@@ -6,57 +6,56 @@
 [ext_resource path="res://floor_tiles_06_diff_1k.jpg" type="Texture" id=4]
 [ext_resource path="res://Deflector.gd" type="Script" id=5]
 
-[sub_resource type="PanoramaSky" id=6]
+[sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 1 )
 
-[sub_resource type="Environment" id=7]
+[sub_resource type="Environment" id=2]
 background_mode = 3
-background_sky = SubResource( 6 )
+background_sky = SubResource( 1 )
 background_color = Color( 1, 1, 1, 1 )
 ambient_light_color = Color( 0.67451, 0.67451, 0.67451, 1 )
 ambient_light_energy = 0.11
 ambient_light_sky_contribution = 0.29
 tonemap_mode = 3
 tonemap_white = 3.54
-ssao_enabled = true
 ssao_radius = 1.7
 ssao_intensity = 1.3
 ssao_radius2 = 1.5
 ssao_light_affect = 0.78
 
-[sub_resource type="SpatialMaterial" id=13]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.392157, 0.392157, 0.392157, 1 )
 albedo_texture = ExtResource( 4 )
 uv1_scale = Vector3( 50, 50, 1 )
 
-[sub_resource type="PlaneMesh" id=1]
+[sub_resource type="PlaneMesh" id=4]
 size = Vector2( 200, 200 )
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 100, 0.2, 100 )
 
-[sub_resource type="BoxShape" id=14]
+[sub_resource type="BoxShape" id=6]
 extents = Vector3( 100, 50, 1 )
 
-[sub_resource type="CubeMesh" id=5]
+[sub_resource type="CubeMesh" id=7]
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape" id=8]
 
-[sub_resource type="SpatialMaterial" id=17]
+[sub_resource type="SpatialMaterial" id=9]
 flags_transparent = true
 albedo_color = Color( 1, 1, 1, 0.231373 )
 
-[sub_resource type="CubeMesh" id=15]
+[sub_resource type="CubeMesh" id=10]
 size = Vector3( 0.362, 2, 2 )
 
-[sub_resource type="SpatialMaterial" id=19]
+[sub_resource type="SpatialMaterial" id=11]
 flags_transparent = true
 albedo_color = Color( 1, 1, 1, 0.231373 )
 
-[sub_resource type="ConcavePolygonShape" id=16]
+[sub_resource type="ConcavePolygonShape" id=12]
 data = PoolVector3Array( -0.181, 1, 1, 0.181, 1, 1, -0.181, -1, 1, 0.181, 1, 1, 0.181, -1, 1, -0.181, -1, 1, 0.181, 1, -1, -0.181, 1, -1, 0.181, -1, -1, -0.181, 1, -1, -0.181, -1, -1, 0.181, -1, -1, 0.181, 1, 1, 0.181, 1, -1, 0.181, -1, 1, 0.181, 1, -1, 0.181, -1, -1, 0.181, -1, 1, -0.181, 1, -1, -0.181, 1, 1, -0.181, -1, -1, -0.181, 1, 1, -0.181, -1, 1, -0.181, -1, -1, 0.181, 1, 1, -0.181, 1, 1, 0.181, 1, -1, -0.181, 1, 1, -0.181, 1, -1, 0.181, 1, -1, -0.181, -1, 1, 0.181, -1, 1, -0.181, -1, -1, 0.181, -1, 1, 0.181, -1, -1, -0.181, -1, -1 )
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=13]
 resource_name = "deflect"
 length = 0.8
 tracks/0/type = "value"
@@ -132,7 +131,7 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.231373 ) ]
 }
 
-[sub_resource type="GIProbeData" id=8]
+[sub_resource type="GIProbeData" id=14]
 bounds = AABB( -120, -30, -120, 240, 60, 240 )
 cell_size = 1.875
 to_cell_xform = Transform( 0.533333, 0, 0, 0, 0.533333, 0, 0, 0, 0.533333, 64, 16, 64 )
@@ -143,7 +142,7 @@ normal_bias = 0.0
 propagation = 0.7
 
 [node name="Main" type="WorldEnvironment"]
-environment = SubResource( 7 )
+environment = SubResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 35.9085, 0 )
@@ -156,17 +155,16 @@ transform = Transform( 0.334032, -0.644318, -0.687951, 0.841715, -0.124565, 0.52
 shadow_enabled = true
 
 [node name="Floor" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 3 )
 use_in_baked_light = true
-mesh = SubResource( 1 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Floor"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Walls" type="Spatial" parent="."]
 
@@ -176,7 +174,7 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Walls/Wall1/StaticBody"]
-shape = SubResource( 14 )
+shape = SubResource( 6 )
 
 [node name="Wall2" type="Spatial" parent="Walls"]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0 )
@@ -185,7 +183,7 @@ transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Walls/Wall2/StaticBody"]
-shape = SubResource( 14 )
+shape = SubResource( 6 )
 
 [node name="Wall3" type="Spatial" parent="Walls"]
 transform = Transform( -1, 0, 2.06632e-07, 0, 1, 0, -2.06632e-07, 0, -1, 0, 0, 0 )
@@ -194,7 +192,7 @@ transform = Transform( -1, 0, 2.06632e-07, 0, 1, 0, -2.06632e-07, 0, -1, 0, 0, 0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Walls/Wall3/StaticBody"]
-shape = SubResource( 14 )
+shape = SubResource( 6 )
 
 [node name="Wall4" type="Spatial" parent="Walls"]
 transform = Transform( 2.50343e-07, 0, 1, 0, 1, 0, -1, 0, 2.50343e-07, 0, 0, 0 )
@@ -203,7 +201,7 @@ transform = Transform( 2.50343e-07, 0, 1, 0, 1, 0, -1, 0, 2.50343e-07, 0, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Walls/Wall4/StaticBody"]
-shape = SubResource( 14 )
+shape = SubResource( 6 )
 
 [node name="Player" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.9617, 0 )
@@ -211,11 +209,11 @@ script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Player"]
 use_in_baked_light = true
-mesh = SubResource( 5 )
+mesh = SubResource( 7 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="Deflector" type="Spatial" parent="Player"]
 script = ExtResource( 5 )
@@ -224,24 +222,23 @@ script = ExtResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23106, 0, 0 )
 
 [node name="MainMeshInstance" type="MeshInstance" parent="Player/Deflector/Area"]
-visible = false
-material_override = SubResource( 17 )
-mesh = SubResource( 15 )
+material_override = SubResource( 9 )
+mesh = SubResource( 10 )
 material/0 = null
 
 [node name="Expanding" type="MeshInstance" parent="Player/Deflector/Area"]
-material_override = SubResource( 19 )
-mesh = SubResource( 15 )
+material_override = SubResource( 11 )
+mesh = SubResource( 10 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Player/Deflector/Area"]
-shape = SubResource( 16 )
+shape = SubResource( 12 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Deflector"]
-anims/deflect = SubResource( 18 )
+anims/deflect = SubResource( 13 )
 
 [node name="GIProbe" type="GIProbe" parent="."]
 extents = Vector3( 120, 30, 120 )
-data = SubResource( 8 )
+data = SubResource( 14 )
 [connection signal="animation_finished" from="Player/Deflector/AnimationPlayer" to="Player/Deflector" method="_on_AnimationPlayer_animation_finished"]
