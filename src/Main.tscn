@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://sunflowers_1k.hdr" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://Camera.gd" type="Script" id=3]
 [ext_resource path="res://floor_tiles_06_diff_1k.jpg" type="Texture" id=4]
+[ext_resource path="res://Deflector.gd" type="Script" id=5]
 
 [sub_resource type="PanoramaSky" id=6]
 panorama = ExtResource( 1 )
@@ -40,6 +41,96 @@ extents = Vector3( 100, 50, 1 )
 [sub_resource type="CubeMesh" id=5]
 
 [sub_resource type="BoxShape" id=10]
+
+[sub_resource type="SpatialMaterial" id=17]
+flags_transparent = true
+albedo_color = Color( 1, 1, 1, 0.231373 )
+
+[sub_resource type="CubeMesh" id=15]
+size = Vector3( 0.362, 2, 2 )
+
+[sub_resource type="SpatialMaterial" id=19]
+flags_transparent = true
+albedo_color = Color( 1, 1, 1, 0.231373 )
+
+[sub_resource type="ConcavePolygonShape" id=16]
+data = PoolVector3Array( -0.181, 1, 1, 0.181, 1, 1, -0.181, -1, 1, 0.181, 1, 1, 0.181, -1, 1, -0.181, -1, 1, 0.181, 1, -1, -0.181, 1, -1, 0.181, -1, -1, -0.181, 1, -1, -0.181, -1, -1, 0.181, -1, -1, 0.181, 1, 1, 0.181, 1, -1, 0.181, -1, 1, 0.181, 1, -1, 0.181, -1, -1, 0.181, -1, 1, -0.181, 1, -1, -0.181, 1, 1, -0.181, -1, -1, -0.181, 1, 1, -0.181, -1, 1, -0.181, -1, -1, 0.181, 1, 1, -0.181, 1, 1, 0.181, 1, -1, -0.181, 1, 1, -0.181, 1, -1, 0.181, 1, -1, -0.181, -1, 1, 0.181, -1, 1, -0.181, -1, -1, 0.181, -1, 1, 0.181, -1, -1, -0.181, -1, -1 )
+
+[sub_resource type="Animation" id=18]
+resource_name = "deflect"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Area/Expanding:material_override:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 0.225313, 0.183011, 0.225313 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.231373 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Area/Expanding:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.203063, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 1.82613, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Area/Expanding:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.133972, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 2.5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Area/Expanding:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Area/MainMeshInstance:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Area/MainMeshInstance:material_override:albedo_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.231373 ) ]
+}
 
 [sub_resource type="GIProbeData" id=8]
 bounds = AABB( -120, -30, -120, 240, 60, 240 )
@@ -126,6 +217,31 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
 shape = SubResource( 10 )
 
+[node name="Deflector" type="Spatial" parent="Player"]
+script = ExtResource( 5 )
+
+[node name="Area" type="Area" parent="Player/Deflector"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23106, 0, 0 )
+
+[node name="MainMeshInstance" type="MeshInstance" parent="Player/Deflector/Area"]
+visible = false
+material_override = SubResource( 17 )
+mesh = SubResource( 15 )
+material/0 = null
+
+[node name="Expanding" type="MeshInstance" parent="Player/Deflector/Area"]
+material_override = SubResource( 19 )
+mesh = SubResource( 15 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Player/Deflector/Area"]
+shape = SubResource( 16 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Deflector"]
+anims/deflect = SubResource( 18 )
+
 [node name="GIProbe" type="GIProbe" parent="."]
 extents = Vector3( 120, 30, 120 )
 data = SubResource( 8 )
+[connection signal="animation_finished" from="Player/Deflector/AnimationPlayer" to="Player/Deflector" method="_on_AnimationPlayer_animation_finished"]
