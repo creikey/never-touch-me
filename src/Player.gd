@@ -1,6 +1,6 @@
 extends KinematicBody
 
-const move_velocity = 7.0
+const move_velocity = 11.0
 
 var accel: float = -9.81
 var velocity: Vector3 = Vector3()
@@ -13,10 +13,10 @@ func _physics_process(delta):
 	var input_vector: Vector2 = Vector2(\
 		float(Input.is_action_pressed("g_right")) - float(Input.is_action_pressed("g_left")), \
 		float(Input.is_action_pressed("g_up")) - float(Input.is_action_pressed("g_down")) \
-	).rotated(rotation.y)
+	)*move_velocity
 	
 	velocity.x = input_vector.x
-	velocity.z = input_vector.y
+	velocity.z = -input_vector.y
 	velocity.y += accel*delta
 	
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
