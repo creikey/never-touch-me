@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Enemy.gd" type="Script" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.972549, 0.423529, 0.423529, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 5.25801, 5.23961, 8.94309 )
+
+[node name="Enemy" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+material_override = SubResource( 1 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 3 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.985909, 0.167285, 0, -0.167285, 0.985909, 0, 7.26416, 6.90242 )
+light_energy = 6.75
+shadow_enabled = true
+spot_range = 31.4
+spot_attenuation = 0.574349
+spot_angle = 28.3
+spot_angle_attenuation = 2.14355
+
+[node name="DetectionArea" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="DetectionArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0759201, 2.52073, -9.83083 )
+shape = SubResource( 4 )
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
