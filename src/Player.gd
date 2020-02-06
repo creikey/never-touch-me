@@ -7,8 +7,8 @@ var velocity: Vector3 = Vector3()
 var rot_velocity: float = 0.0
 
 func _physics_process(delta):
-	rot_velocity = float(Input.is_action_pressed("g_turn_right")) - float(Input.is_action_pressed("g_turn_left"))
-	rot_velocity *= -10.0
+#	rot_velocity = float(Input.is_action_pressed("g_turn_right")) - float(Input.is_action_pressed("g_turn_left"))
+#	rot_velocity *= -10.0
 	
 	var input_vector: Vector2 = Vector2(\
 		float(Input.is_action_pressed("g_right")) - float(Input.is_action_pressed("g_left")), \
@@ -20,4 +20,4 @@ func _physics_process(delta):
 	velocity.y += accel*delta
 	
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
-	rotation.y += rot_velocity*delta
+#	rotation.y += rot_velocity*delta
